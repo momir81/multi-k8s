@@ -15,4 +15,4 @@ FROM nginx
 EXPOSE 3000
 
 COPY ./nginx/default.conf /stc/nginx/conf.d/default.conf 
-COPY --from=bulder /app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
