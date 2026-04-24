@@ -59,4 +59,4 @@ jobs:
       
       - name: Deploy
         if: github.ref == 'refs/heads/main'
-        run: bash ./deploy.sh
+        run: bash deploy.sh
