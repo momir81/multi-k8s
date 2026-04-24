@@ -8,6 +8,10 @@ on:
 
 jobs:
   build:
+    permissions:
+      id-token: write
+      contents: read
+
     runs-on: ubuntu-latest
 
     env:
@@ -32,6 +36,11 @@ jobs:
         with:
           workload_identity_provider: projects/473665593474/locations/global/workloadIdentityPools/github-pool/providers/github-provider
           service_account: multi-k8s-deployer@multi-k8s-494209.iam.gserviceaccount.com
+      
+      - name: Check OIDC env
+        run: |
+          echo "TOKEN: $ACTIONS_ID_TOKEN_REQUEST_TOKEN"
+          echo "URL: $ACTIONS_ID_TOKEN_REQUEST_URL"
 
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
