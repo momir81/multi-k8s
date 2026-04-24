@@ -10,7 +10,7 @@ docker push momir81/multi-client:$SHA
 docker push momir81/multi-server:$SHA
 docker push momir81/multi-worker:$SHA
 
-kubect apply -f k8s
+kubectl apply -f k8s
 kubectl set image deployments/client-deployment client=momir81/multi-client:$SHA
 kubectl set image deployments/server-deployment server=momir81/multi-server:$SHA
 kubectl set image deployments/worker-deployment worker=momir81/multi-worker:$SHA
