@@ -25,11 +25,11 @@ jobs:
       - name: Set up Docker
         run: docker --version
 
-      - name: Install Google Cloud SDK
-        run: |
-          curl https://sdk.cloud.google.com | bash > /dev/null
-          source $HOME/google-cloud-sdk/path.bash.inc
-          gcloud components update kubectl -q
+      # - name: Install Google Cloud SDK
+      #   run: |
+      #     curl https://sdk.cloud.google.com | bash > /dev/null
+      #     source $HOME/google-cloud-sdk/path.bash.inc
+      #     gcloud components update kubectl -q
 
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2
@@ -44,6 +44,11 @@ jobs:
 
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
+        with:
+          install_components: 'gke-gcloud-auth-plugin'
+
+      - name: Enable GKE auth plugin
+        run: echo "USE_GKE_GCLOUD_AUTH_PLUGIN=True" >> $GITHUB_ENV
 
       - name: Get cluster credentials
         run: gcloud container clusters get-credentials multi-k8s-cluster --zone europe-central2-a
